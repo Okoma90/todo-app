@@ -1,14 +1,16 @@
 import { useState } from "react";
+import useLocalStorage from "./hooks/useLocalStorage";
+
 import CustomForm from "./components/CustomForm";
 import EditForm from "./components/EditForm";
 import TaskList from "./components/TaskList";
-import useLocalStorage from "./hooks/useLocalStorage";
+import ThemeSwitcher from "./components/ThemeSwitcher";
 
 function App() {
   const [tasks, setTasks] = useLocalStorage("todo-app.tasks", []);
   const [PreviousFocusEl, setPreviousFocusEl] = useState(null);
   const [editedTask, setEditedTask] = useState(null);
-  const [isEditing, setIsEditing] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   const addTask = (task) => {
     setTasks((prevState) => [...prevState, task]);
@@ -63,6 +65,7 @@ function App() {
           enterEditMode={enterEditMode}
         />
       )}
+      <ThemeSwitcher />
     </div>
   );
 }
